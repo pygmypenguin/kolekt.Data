@@ -21,14 +21,15 @@ jobs:
       - name: Setup .NET Core @ Latest
         uses: actions/setup-dotnet@v1
         with:
-          source-url: https://nuget.pkg.github.com/kolekt.Data/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}    
+          dotnet-version: 3.1.100
 
-      - name: Build solution and generate NuGet package
-        run: |  
-          cd kolekt.Data/kolekt.Data
-          dotnet pack -c Release -o out  
+      - name: Build solution
+        run: dotnet build --configuration Release
+        working-directory: ./kolekt.Data
+      
+      - name: Pack kolekt.Data
+        run: dotnet pack -c Release  -o nupkg
+        working-directory: ./kolekt.Data
 
       - name: Push generated package to GitHub registry
-        run: dotnet nuget push ./kolekt.Data/kolekt.Data/out/*.nupkg --skip-duplicate --no-symbols true
+        run: dotnet nuget push bin/Release/kolekt.Data.*.nupkg" --source "github"
