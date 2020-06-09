@@ -32,6 +32,9 @@ jobs:
 
       - name: Push generated package to GitHub registry
         working-directory: ./kolekt.Data
-        run: dotnet nuget push "nupkgs/kolekt.Data.*.nupkg" -s "https://nuget.pkg.github.com/pygmypenguin/index.json" -k $PUSH_TOKEN
         env:
           PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo $PUSH_TOKEN
+          echo ${{ secrets.GITHUB_TOKEN }}
+          dotnet nuget push "nupkgs/kolekt.Data.*.nupkg" -s "https://nuget.pkg.github.com/pygmypenguin/index.json" -k $PUSH_TOKEN
