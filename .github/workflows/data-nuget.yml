@@ -22,13 +22,16 @@ jobs:
         with:
           dotnet-version: 3.1.100
 
-      - name: Build solution	
+      - name: Build solution
+        working-directory: ./kolekt.Data
         run: dotnet build --configuration Release	
 
       - name: Pack kolekt.Data
+        working-directory: ./kolekt.Data
         run: dotnet pack -c Release -o nupkgs
 
       - name: Push generated package to GitHub registry
+        working-directory: ./kolekt.Data
         run: dotnet nuget push "nupkgs/kolekt.Data.*.nupkg" -s "https://nuget.pkg.github.com/pygmypenguin/index.json" -k $GITHUB_TOKEN
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
