@@ -1,0 +1,2 @@
+﻿ dotnet ef migrations add UnnamedMigration --project kolekt.Data --startup-project kolekt.Data.Migration
+ dotnet ef database update --project kolekt.Data --startup-project kolekt.Data.Migration
