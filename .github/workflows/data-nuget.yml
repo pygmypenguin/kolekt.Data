@@ -25,6 +25,9 @@ jobs:
       - name: Build solution
         working-directory: ./kolekt.Data
         run: dotnet build --configuration Release	
+      
+      - name: add Github nuget source
+        run: dotnet nuget sources add --name github --source https://nuget.pkg.github.com/pygmypenguin/index.json --username pygmypenguin --password ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pack kolekt.Data
         working-directory: ./kolekt.Data
@@ -34,7 +37,4 @@ jobs:
         working-directory: ./kolekt.Data
         env:
           PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo $PUSH_TOKEN
-          echo ${{ secrets.GITHUB_TOKEN }}
-          dotnet nuget push "nupkgs/kolekt.Data.*.nupkg" -s "https://nuget.pkg.github.com/pygmypenguin/index.json" -k $PUSH_TOKEN
+        run: dotnet nuget push "nupkgs/kolekt.Data.*.nupkg" --source "github"
