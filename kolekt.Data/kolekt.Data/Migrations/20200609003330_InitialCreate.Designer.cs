@@ -10,7 +10,7 @@ using kolekt.Data;
 namespace kolekt.Data.Migrations
 {
     [DbContext(typeof(EventStoreDataContext))]
-    [Migration("20200609000405_InitialCreate")]
+    [Migration("20200609003330_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -26,7 +26,7 @@ namespace kolekt.Data.Migrations
                     table.PrimaryKey("PK_Events", x => x.Sequence);
                 });
 
-            migrationBuilder.Sql("ALTER TABLE [Events] ADD [CreatedAt] AS (GETUTCDATE())");
+            migrationBuilder.Sql("ALTER TABLE [Events] ADD [CreatedAt] as (GETUTCDATE())");
             migrationBuilder.CreateIndex(
                 name: "IX_Events_Version_AggregateId",
                 table: "Events",
